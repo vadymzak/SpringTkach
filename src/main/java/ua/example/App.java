@@ -1,10 +1,18 @@
 package ua.example;
 
+import ua.example.interfaces.EventLogger;
+
 public class App {
 
     private Client client;
 
     private ConsoleEventLogger eventLogger;
+
+    App() { }
+
+    App(Client client, EventLogger eventLogger) {
+
+    }
 
     public static void main(String[] args) {
 
