@@ -1,27 +1,30 @@
 package ua.example;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.example.interfaces.EventLogger;
 
 public class App {
 
     private Client client;
 
-    private ConsoleEventLogger eventLogger;
+    private EventLogger eventLogger;
 
     App() { }
 
     App(Client client, EventLogger eventLogger) {
-
+        this.client = client;
+        this.eventLogger = eventLogger;
     }
 
     public static void main(String[] args) {
 
-        App app = new App();
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
-        app.client = new Client("1", "John Smith");
-        app.eventLogger = new ConsoleEventLogger();
+        App app = (App)ctx.getBean("app");
 
         app.logEvent("Some event for user 1");
+
     }
 
     private void logEvent(String msg) {
