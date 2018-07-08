@@ -1,5 +1,6 @@
 package ua.example;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 
@@ -11,8 +12,11 @@ public class Event {
 
     private Date date;
 
-    public Event(Date date) {
+    private DateFormat df;
+
+    public Event(Date date, DateFormat df) {
         this.date = date;
+        this.df =df;
     }
 
     public int getId() {
@@ -44,7 +48,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", msg='" + msg + '\'' +
-                ", date=" + date +
+                ", date=" + df.format(date) +
                 '}';
     }
 

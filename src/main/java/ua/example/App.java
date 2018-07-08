@@ -23,15 +23,17 @@ public class App {
 
         App app = (App)ctx.getBean("app");
 
-        app.logEvent("Some event for user 1");
+        app.client = new Client("1", "John Smith");
 
+        app.logEvent(ctx, "Some event for user 1");
     }
 
-    private void logEvent(String msg) {
+    private void logEvent(ApplicationContext ctx, String msg) {
 
         String message = msg.replace(client.getId(), client.getFullName());
-
-        eventLogger.logEvent(message);
+        Event event = (Event)ctx.getBean("event");
+        event.setMsg(message);
+        eventLogger.logEvent(event);
 
 
     }
