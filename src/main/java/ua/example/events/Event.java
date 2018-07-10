@@ -1,4 +1,4 @@
-package ua.example;
+package ua.example.events;
 
 import java.text.DateFormat;
 import java.util.Date;

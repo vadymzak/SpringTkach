@@ -15,7 +15,7 @@
         <constructor-arg ref="eventLogger"/>
     </bean>
 
-    <bean id="event" class="ua.example.Event" scope="prototype">
+    <bean id="event" class="ua.example.events.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date" />
         </constructor-arg>
@@ -23,5 +23,14 @@
     </bean>
 
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+
+    <bean id="fileEventLogger" class="ua.example.events.FileEventLogger" init-method="init">
+        <constructor-arg value="/home/vadym/FileLogger.txt"/>
+    </bean>
+
+    <bean id="cacheFileLogger" class="ua.example.events.CashFileLogger" destroy-method="destroy">
+        <constructor-arg value="/home/vadym/FileLogger.txt"/>
+        <constructor-arg value="5"/>
+    </bean>
 
 </beans>
