@@ -3,12 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="loggers.xml"/>
+
     <bean id="client" class="ua.example.Client">
         <constructor-arg value="1" />
         <constructor-arg value="John Smith" />
     </bean>
-
-    <bean id="eventLogger" class="ua.example.ConsoleEventLogger"/>
 
     <bean id="app" class="ua.example.App">
         <constructor-arg ref="client"/>
@@ -24,13 +24,6 @@
 
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
-    <bean id="fileEventLogger" class="ua.example.events.FileEventLogger" init-method="init">
-        <constructor-arg value="C:\Users\us9012\Documents\FileLogger.txt"/>
-    </bean>
 
-    <bean id="cacheFileLogger" class="ua.example.events.CashFileLogger" destroy-method="destroy" init-method="init">
-        <constructor-arg value="C:\Users\us9012\Documents\FileLogger.txt"/>
-        <constructor-arg value="3"/>
-    </bean>
 
 </beans>
