@@ -1,6 +1,6 @@
-package ua.example;
+package ua.example.events;
 
-import ua.example.events.Event;
+import ua.example.beans.Event;
 import ua.example.interfaces.EventLogger;
 
 public class ConsoleEventLogger implements EventLogger {

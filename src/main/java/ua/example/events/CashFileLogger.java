@@ -1,5 +1,7 @@
 package ua.example.events;
 
+import ua.example.beans.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 

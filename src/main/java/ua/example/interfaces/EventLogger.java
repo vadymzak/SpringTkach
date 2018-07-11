@@ -1,6 +1,6 @@
 package ua.example.interfaces;
 
-import ua.example.events.Event;
+import ua.example.beans.Event;
 
 import java.io.IOException;
 

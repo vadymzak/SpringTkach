@@ -3,7 +3,9 @@ package ua.example;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.example.events.Event;
+import ua.example.beans.Client;
+import ua.example.beans.Event;
+import ua.example.beans.EventType;
 import ua.example.interfaces.EventLogger;
 
 import java.io.IOException;
@@ -27,19 +29,25 @@ public class App {
 
         App app = (App)ctx.getBean("app");
 
-        app.logEvent(ctx, "Some event for user 1");
+        Event event = (Event)ctx.getBean("event");
 
-        app.logEvent(ctx, "Some event for user 2");
+        app.logEvent(EventType.INFO, event,"Some event for user 1");
 
-        app.logEvent(ctx, "Some event for user 3");
+        event = (Event)ctx.getBean("event");
+
+        app.logEvent(EventType.ERROR, event,"Some event for user 2");
+
+        event = (Event)ctx.getBean(Event.class);
+
+        app.logEvent(null, event, "Some event for user 3");
 
         ctx.close();
     }
 
-    private void logEvent(ApplicationContext ctx, String msg) {
+    private void logEvent(EventType eventType, Event event, String msg) {
 
         String message = msg.replace(client.getId(), client.getFullName());
-        Event event = (Event)ctx.getBean("event");
+
         event.setMsg(message);
         try {
             eventLogger.logEvent(event);

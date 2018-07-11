@@ -1,6 +1,7 @@
 package ua.example.events;
 
 import org.apache.commons.io.FileUtils;
+import ua.example.beans.Event;
 import ua.example.interfaces.EventLogger;
 
 import java.io.File;

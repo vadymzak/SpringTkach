@@ -5,7 +5,7 @@
 
     <import resource="loggers.xml"/>
 
-    <bean id="client" class="ua.example.Client">
+    <bean id="client" class="ua.example.beans.Client">
         <constructor-arg value="1" />
         <constructor-arg value="John Smith" />
     </bean>
@@ -13,9 +13,10 @@
     <bean id="app" class="ua.example.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="cacheFileLogger"/>
+
     </bean>
 
-    <bean id="event" class="ua.example.events.Event" scope="prototype">
+    <bean id="event" class="ua.example.beans.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date" />
         </constructor-arg>

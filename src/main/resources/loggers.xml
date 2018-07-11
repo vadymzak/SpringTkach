@@ -3,14 +3,23 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="eventLogger" class="ua.example.ConsoleEventLogger"/>
+    <bean id="consoleEventLogger" class="ua.example.events.ConsoleEventLogger"/>
 
-    <bean id="fileEventLogger" class="ua.example.events.FileEventLogger" init-method="init" abstract="true">
+    <bean id="fileEventLogger" class="ua.example.events.FileEventLogger" init-method="init">
         <constructor-arg value="C:\Users\us9012\Documents\FileLogger.txt"/>
     </bean>
 
     <bean id="cacheFileLogger" class="ua.example.events.CashFileLogger" destroy-method="destroy" parent="fileEventLogger">
 
         <constructor-arg value="3"/>
+    </bean>
+
+    <bean id="combinedEventLogger" class="ua.example.events.CombinedEventLogger">
+        <constructor-arg>
+            <list>
+                <ref bean="fileEventLogger"/>
+                <ref bean="consoleEventLogger" />
+            </list>
+        </constructor-arg>
     </bean>
 </beans>
