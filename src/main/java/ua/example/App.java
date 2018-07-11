@@ -29,6 +29,10 @@ public class App {
 
         app.logEvent(ctx, "Some event for user 1");
 
+        app.logEvent(ctx, "Some event for user 2");
+
+        app.logEvent(ctx, "Some event for user 3");
+
         ctx.close();
     }
 

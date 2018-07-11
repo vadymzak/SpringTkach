@@ -12,7 +12,7 @@
 
     <bean id="app" class="ua.example.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="cacheFileLogger"/>
     </bean>
 
     <bean id="event" class="ua.example.events.Event" scope="prototype">
@@ -25,12 +25,12 @@
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
     <bean id="fileEventLogger" class="ua.example.events.FileEventLogger" init-method="init">
-        <constructor-arg value="/home/vadym/FileLogger.txt"/>
+        <constructor-arg value="C:\Users\us9012\Documents\FileLogger.txt"/>
     </bean>
 
-    <bean id="cacheFileLogger" class="ua.example.events.CashFileLogger" destroy-method="destroy">
-        <constructor-arg value="/home/vadym/FileLogger.txt"/>
-        <constructor-arg value="5"/>
+    <bean id="cacheFileLogger" class="ua.example.events.CashFileLogger" destroy-method="destroy" init-method="init">
+        <constructor-arg value="C:\Users\us9012\Documents\FileLogger.txt"/>
+        <constructor-arg value="3"/>
     </bean>
 
 </beans>
