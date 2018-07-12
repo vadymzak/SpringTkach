@@ -9,18 +9,22 @@ import ua.example.beans.EventType;
 import ua.example.interfaces.EventLogger;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class App {
 
     private Client client;
 
-    private EventLogger eventLogger;
+    private EventLogger defaultLogger;
+
+    private Map<EventType, EventLogger> loggers;
 
     App() { }
 
-    App(Client client, EventLogger eventLogger) {
+    App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> eventLoggers) {
         this.client = client;
-        this.eventLogger = eventLogger;
+        this.defaultLogger = eventLogger;
+        this.loggers = eventLoggers;
     }
 
     public static void main(String[] args) {
@@ -47,10 +51,14 @@ public class App {
     private void logEvent(EventType eventType, Event event, String msg) {
 
         String message = msg.replace(client.getId(), client.getFullName());
-
         event.setMsg(message);
+
+        EventLogger logger = loggers.get(eventType);
+        if (logger == null) {
+            logger = defaultLogger;
+        }
         try {
-            eventLogger.logEvent(event);
+            logger.logEvent(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
