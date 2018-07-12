@@ -25,16 +25,15 @@
         <property name="greeting" value="${greeting}"/>
     </bean>
 
+    <util:map id="loggerMap">
+        <entry key="INFO" value-ref="consoleEventLogger"/>
+        <entry key="ERROR" value-ref="combinedEventLogger"/>
+    </util:map>
+
     <bean id="app" class="ua.example.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="cacheFileLogger"/>
-        <constructor-arg>
-            <map>
-                <entry key="INFO" value-ref="consoleEventLogger"/>
-                <entry key="ERROR" value-ref="combinedEventLogger"/>
-            </map>
-        </constructor-arg>
-
+        <constructor-arg ref="loggerMap"/>
     </bean>
 
     <bean id="event" class="ua.example.beans.Event" scope="prototype">
